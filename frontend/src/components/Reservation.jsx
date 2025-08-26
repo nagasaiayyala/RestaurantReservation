@@ -16,14 +16,17 @@ const Reservation = () => {
   const handleReservation = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-  "http://localhost:5000/api/v1/reservation/send",
+      const API = import.meta.env.VITE_API_URL;
+
+const { data } = await axios.post(
+  `${API}/reservation/send`,   // ✅ matches backend route
   { firstName, lastName, email, phone, date, time },
   {
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
   }
 );
+
 
 toast.success(data.message);
 
